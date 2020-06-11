@@ -1,0 +1,67 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{message}}</p>
+        <input v-model="tempo" id="tempo" type="number" min=1 max=300>
+        {{ tempo }}
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/webmidi"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+    var globalTempo = 0;
+
+    function changeTempo(tempo) {
+        var iterations = 0;
+        var msPer24thQuarterNote = 60000 / tempo / 24;
+        for (var i = 6; i < 20; i++) {
+            iterations = 24 * i;
+            if (msPer24thQuarterNote * iterations > 3000) {
+                break
+            }
+        }
+        console.log(iterations / 24);
+        setTimeout(function() {
+            console.log("done");
+        }, msPer24thQuarterNote * iterations);
+        for (var i = 0; i < WebMidi.outputs.length; i++) {
+            var curT = WebMidi.time;
+            console.log(WebMidi.outputs[i].name);
+            for (var j = 0; j < iterations; j++) {
+                WebMidi.outputs[i].sendClock({ time: curT + j * msPer24thQuarterNote });
+            }
+        }
+    }
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: "",
+            tempo: 90,
+        },
+        mounted: function() {
+            console.log("loaded");
+            var _this = this;
+            WebMidi.enable(function(err) {
+                if (err) {
+                    _this.message = "WebMidi could not be enabled: " + err;
+                } else {
+                    _this.message = "WebMidi enabled!";
+                    console.log(WebMidi.outputs);
+                }
+            });
+        },
+        watch: {
+            tempo: function(val) {
+                console.log(`tempo changed to ${val-1}`)
+                changeTempo(val);
+            },
+        },
+    })
+    </script>
+</body>
+
+</html>
