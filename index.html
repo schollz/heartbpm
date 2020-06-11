@@ -9,32 +9,28 @@
         <input v-model="tempo" id="tempo" type="number" min=1 max=300>
         {{ tempo }}
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/webmidi"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
-    var globalTempo = 0;
+    var globalTempo = 90;
+    var interval = 60000 / globalTempo / 24; // ms
+    var expected = Date.now() + interval;
 
-    function changeTempo(tempo) {
-        var iterations = 0;
-        var msPer24thQuarterNote = 60000 / tempo / 24;
-        for (var i = 6; i < 20; i++) {
-            iterations = 24 * i;
-            if (msPer24thQuarterNote * iterations > 3000) {
-                break
-            }
+    function step() {
+        var dt = Date.now() - expected; // the drift (positive for overshooting)
+        if (dt > interval) {
+            // something really bad happened. Maybe the browser (tab) was inactive?
+            // possibly special handling to avoid futile "catch up" run
         }
-        console.log(iterations / 24);
-        setTimeout(function() {
-            console.log("done");
-        }, msPer24thQuarterNote * iterations);
         for (var i = 0; i < WebMidi.outputs.length; i++) {
-            var curT = WebMidi.time;
-            console.log(WebMidi.outputs[i].name);
-            for (var j = 0; j < iterations; j++) {
-                WebMidi.outputs[i].sendClock({ time: curT + j * msPer24thQuarterNote });
-            }
+            WebMidi.outputs[i].sendClock();
         }
+        expected += interval;
+        setTimeout(step, Math.max(0, interval - dt)); // take into account drift
     }
+
+
 
     var app = new Vue({
         el: '#app',
@@ -51,13 +47,23 @@
                 } else {
                     _this.message = "WebMidi enabled!";
                     console.log(WebMidi.outputs);
+                    setTimeout(step, interval);
                 }
             });
         },
+        created: function() {
+            this.debouncedChangeTempo = _.debounce(this.changeTempo, 500)
+        },
         watch: {
             tempo: function(val) {
-                console.log(`tempo changed to ${val-1}`)
-                changeTempo(val);
+                this.debouncedChangeTempo();
+            },
+        },
+        methods: {
+            changeTempo: function() {
+                console.log("changing tempo to " + this.tempo);
+                globalTempo = this.tempo;
+                interval = 60000 / globalTempo / 24;
             },
         },
     })
