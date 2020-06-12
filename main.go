@@ -55,14 +55,14 @@ func run() (err error) {
 		}
 	}()
 
-	ma := movingaverage.New(5)
+	ma := movingaverage.New(25)
 	lastTime := time.Now()
 
 	go func() {
 		for {
 			var reply string
 			reply, err = read(s)
-			if strings.TrimSpace(reply) == "b" {
+			if strings.Contains(reply, "b") {
 				diff := time.Since(lastTime).Seconds()
 				if diff > 0.06 && diff < 2.0 {
 					ma.Add(diff)
@@ -93,7 +93,7 @@ func run() (err error) {
 		}
 		c.JSON(200, gin.H{
 			"success": true,
-			"bpm":     math.Round(60.0/avg*10) / 10,
+			"bpm":     math.Round(1.5*60.0/avg*10) / 10,
 		})
 	})
 	router.Run()

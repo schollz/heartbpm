@@ -3,10 +3,10 @@
 <head>
     <style>
         #app {
-			max-width: 42em;
-			margin: 0em auto;
-		}
-	</style>
+            max-width: 42em;
+            margin: 0em auto;
+        }
+    </style>
 </head>
 
 <body>
@@ -41,7 +41,7 @@
 
 
     var app;
-    var globalTempo = 0;
+    var globalTempo = 60;
     var interval = 60000 / globalTempo / 24; // ms
     var expected = Date.now() + interval;
 
@@ -56,6 +56,9 @@
             // possibly special handling to avoid futile "catch up" run
         }
         for (var i = 0; i < WebMidi.outputs.length; i++) {
+            // if (WebMidi.outputs[i].name.includes("Through")) {
+            //     continue;
+            // }
             WebMidi.outputs[i].sendClock();
         }
         expected += interval;
@@ -83,7 +86,6 @@
                 } else {
                     _this.message = "WebMidi enabled!";
                     console.log(WebMidi.outputs);
-                    setTimeout(step, interval);
                 }
             });
 
@@ -122,7 +124,9 @@
                 this.tempo = parseInt(this.tempo);
                 if (this.tempo == globalTempo) {
                     data.push({ x: (new Date().getTime()) / 1000 - this.startTime, y: globalTempo })
-                    chart.update()
+                    if (chart != null) {
+                        chart.update()
+                    }
                     return
                 }
                 console.log("updated");
@@ -131,9 +135,6 @@
                     this.bpmdata += `${globalTempo} ${lastTime}` + "\n";
                 }
                 this.lastChange = (new Date().getTime()) / 1000;
-                if (this.tempo > 0 && globalTempo == 0) {
-                    setTimeout(step, interval);
-                }
                 // set tempo and interval
                 globalTempo = this.tempo;
                 interval = 60000 / globalTempo / 24;
@@ -145,7 +146,7 @@
                     chart = new TimeChart(el, {
                         series: [{ data }],
                     });
-                } else if (data.length > 2) {
+                } else if (data.length > 2 && chart != null) {
                     chart.update()
                 }
             },
