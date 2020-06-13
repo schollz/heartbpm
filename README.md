@@ -1,6 +1,6 @@
 # heartbpm
 
-Its 2020 and entirely possible to [control synthesizers with your thoughts](https://www.youtube.com/watch?v=qSKBtEBRWi4), so of course its entirely possible to control your synthesizers with your pulse. In fact, its entirely possible to control your synthesizers with your heart rate with only ~$50 of equipment. This repository contains the code and instructions to hook your blood to your music.
+Its 2020 and entirely possible to [control synthesizers with your thoughts](https://www.youtube.com/watch?v=qSKBtEBRWi4), so of course its entirely possible to control your synthesizers with your heart pulse. In fact, its entirely possible to control your synthesizers with your heart rate with only ~$50 of equipment. This repository contains the code and instructions to hook your blood to your music.
 
 
 <p align="center"><a href="https://www.youtube.com/watch?v=o_GRabvE5Pw"><img src="https://img.youtube.com/vi/o_GRabvE5Pw/0.jpg" alt="Demo of playing" style="max-width:200px;"></a></p>
@@ -50,7 +50,7 @@ First get the code. You can [clone from Github](https://github.com/schollz/heart
 
 ## Setup the hardware.
 
-First you can set up the pulse sensor. Simply attach the pulsesensor to the arduino.
+Simply attach the pulse sensor to the Arduino, plugging the data channel into `A0`.
 
 <p align="center">
 <img alt="Connecting the pulse sensor to the Arduino" src="https://schollz.com/img/heartbeat_bb_POoEsoKAle.jpg" width=550px/>
@@ -60,7 +60,7 @@ Now use the [Arduino IDE](https://www.arduino.cc/en/main/software) to upload the
 
 ## Setup the software.
 
-First make sure you have Go installed on your computer You can [download Go here](https://golang.org/dl/). Now you can go into the `heartbpm` code (download [here](https://github.com/schollz/heartbpm)) and simply run in a terminal:
+First make sure you have Go installed on your computer You can [download Go here](https://golang.org/dl/). Now you can go into the `heartbpm` code and simply run in a terminal:
 
 ```bash
 $ go build -v
