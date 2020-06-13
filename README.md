@@ -50,9 +50,9 @@ First get the code. You can [clone from Github](https://github.com/schollz/heart
 
 First you can set up the pulse sensor. Simply attach the pulsesensor to the arduino.
 
-<center>
-<img alt="Connecting the pulse sensor to the Arduino" src="https://schollz.com/img/heartbeat_bb_POoEsoKAle.jpg" width="100" style="max-width: 300px;"/>
-</center>
+<p align="center">
+<img alt="Connecting the pulse sensor to the Arduino" src="https://schollz.com/img/heartbeat_bb_POoEsoKAle.jpg"/>
+</p>
 
 Now use the [Arduino IDE](https://www.arduino.cc/en/main/software) to upload the [`heartbeat.ino`](https://github.com/schollz/heartbpm/blob/master/heartbeat.ino). Once that is uploaded, you can keep the Arduino connected and move on to the software.
 
