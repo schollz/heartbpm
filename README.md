@@ -1,6 +1,6 @@
 # heartbpm
 
-Its 2020 and entirely possible to [control synthesizers with your thoughts](https://www.youtube.com/watch?v=qSKBtEBRWi4), so of course its entirely possible to control your synthesizers with your heart pulse. In fact, its entirely possible to control your synthesizers with your heart rate with only ~$50 of equipment. This repository contains the code and instructions to hook your blood to your music.
+Its 2020 and entirely possible to [control synthesizers with your thoughts](https://www.youtube.com/watch?v=qSKBtEBRWi4), so of course its entirely possible to sync your synthesizers with your heart pulse (and for only ~$50 of hardware). This repository contains the code and instructions to hook your blood to your music.
 
 
 This system is really simple and will work with basically any modern electronic instrument (as long as it has MIDI). Here's a little schematic:
