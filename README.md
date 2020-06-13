@@ -3,11 +3,7 @@
 Its 2020 and entirely possible to [control synthesizers with your thoughts](https://www.youtube.com/watch?v=qSKBtEBRWi4), so of course its entirely possible to control your synthesizers with your heart pulse. In fact, its entirely possible to control your synthesizers with your heart rate with only ~$50 of equipment. This repository contains the code and instructions to hook your blood to your music.
 
 
-<p align="center"><a href="https://www.youtube.com/watch?v=o_GRabvE5Pw"><img src="https://img.youtube.com/vi/o_GRabvE5Pw/0.jpg" alt="Demo of playing" style="max-width:200px;"></a></p>
-
-## How does it work?
-
-The system is really simple and will work with basically any modern synthesizer (as long as it has MIDI). Here's a little schematic:
+This system is really simple and will work with basically any modern synthesizer (as long as it has MIDI). Here's a little schematic:
 
 <p align="center">
 <img src="https://schollz.com/img/schematic1.PNG" alt="A basic schematic of the setup." width=550px>
@@ -15,6 +11,10 @@ The system is really simple and will work with basically any modern synthesizer 
 
 A finger is connected to a pulse sensor. The pulse sensor is connected to an Arduino. The Arduino can detect a pulse and send serial data to a computer. The computer runs a server that reads the serial data which updates a web page. The web page uses Web MIDI to send out the MIDI clock to all connected synths! *Music* ensues.
 
+Here's a demo of me playing three instruments with my heart rate:
+
+
+<p align="center"><a href="https://www.youtube.com/watch?v=o_GRabvE5Pw"><img src="https://img.youtube.com/vi/o_GRabvE5Pw/0.jpg" alt="Demo of playing" style="max-width:200px;"></a></p>
 
 The following instructions will give you a more detailed instruction.
 
