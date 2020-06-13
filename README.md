@@ -22,7 +22,7 @@ The following instructions will give you a more detailed instruction.
 
 ### Stuff to buy.
 
-You'll be able to get started with $50 of equipment, plus computer and MIDI instrument.
+You'll be able to get started with ~$50 of equipment, plus computer and MIDI instrument.
 
 <ul>
 	<li>
