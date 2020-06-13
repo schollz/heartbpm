@@ -1,0 +1,184 @@
+<html>
+
+<head>
+    <style>
+        #app {
+            max-width: 42em;
+            margin: 0em auto;
+        }
+    </style>
+</head>
+
+<body>
+    ///if .HaveCom///
+    <div style="margin:0em auto;width: 100%; max-width: 42em; height: 80px; padding-bottom: 300px;">
+        <canvas id="myChart"></canvas>
+    </div>
+    ///end///
+    <div id="app">
+        ///if .HaveCom/// ///else///<p>No com. Run <code>--com COMPORT</code> to get data.</p>///end///
+        <p>{{message}}</p>
+        Set tempo (BPM): <input v-model="tempo" id="tempo" type="number" min=0 max=300 step=".1">
+        <br>
+        <p>Tempo data:</p>
+        <textarea id="w3review" name="w3review" rows="4" cols="50" v-model="bpmdata"></textarea>
+    </div>
+    <script type="text/javascript" src="/static/js/moment.min.js"></script>
+    <script type="text/javascript" src="/static/js/chart.js"></script>
+    <script type="text/javascript" src="/static/js/chartjs-plugin-streaming.js"></script>
+    <script src="/static/js/lodash.min.js"></script>
+    <script src="/static/js/webmidi.js"></script>
+    <script src="/static/js/vue.js"></script>
+    ///if .HaveCom///
+    <script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+
+    var chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            datasets: [{
+                label: 'Pulse',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [],
+            }]
+        },
+        options: {
+            elements: {
+                point: {
+                    radius: 1
+                }
+            },
+            scales: {
+                yAxes: [{
+                    id: 'Pulse',
+                    type: 'linear',
+                    position: 'left',
+                    ticks: {
+                        min: 0
+                    }
+                }],
+                xAxes: [{
+                    type: 'realtime',
+                    realtime: {
+                        delay: 0,
+                        refresh: 100,
+                        onRefresh: function(chart) {
+                            fetch('/bpm')
+                                .then(response => response.json())
+                                .then(data => {
+                                    chart.data.datasets[0].data.push({
+                                        x: Date.now(),
+                                        y: data.point,
+                                    });
+                                });
+
+                        }
+                    }
+                }]
+            }
+        }
+    });
+    </script>
+    ///end///
+    <script type="text/javascript">
+    var app;
+    var globalTempo = 60;
+    var interval = 60000 / globalTempo / 24;
+    var expected = Date.now() + interval;
+
+
+    function step() {
+        if (globalTempo == 0) {
+            return;
+        }
+        var dt = Date.now() - expected; // the drift (positive for overshooting)
+        if (dt > interval) {
+            // something really bad happened. Maybe the browser (tab) was inactive?
+            // possibly special handling to avoid futile "catch up" run
+        }
+        for (var i = 0; i < WebMidi.outputs.length; i++) {
+            // if (WebMidi.outputs[i].name.includes("Through")) {
+            //     continue;
+            // }
+            WebMidi.outputs[i].sendClock();
+        }
+        expected += interval;
+        setTimeout(step, Math.max(0, interval - dt)); // take into account drift
+    }
+
+
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: "",
+            tempo: 0,
+            lastChange: (new Date().getTime()) / 1000,
+            bpmdata: "",
+            bpms: [],
+            startTime: (new Date().getTime()) / 1000,
+            dataPoints: [],
+        },
+        mounted: function() {
+            console.log("loaded");
+            var _this = this;
+            WebMidi.enable(function(err) {
+                if (err) {
+                    _this.message = "WebMidi could not be enabled, make sure you are using Chrome"
+                } else {
+                    names = []
+                    for (var i = 0; i < WebMidi.outputs.length; i++) {
+                        names.push(WebMidi.outputs[i].name)
+                    }
+                    if (names.length > 0) {
+                        _this.message = `Tempo syncing: ${names.join(', ')}`;
+                    } else {
+                        _this.message = "No devices attached."
+                    }
+
+                    setTimeout(step, interval);
+                }
+            });
+
+            ///if.HaveCom///
+            _this.intervalid1 = setInterval(function() {
+                fetch('/bpm')
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        _this.tempo = data.bpm;
+                    });
+            }.bind(_this), 1000);
+            ///end///
+
+        },
+        created: function() {
+            this.debouncedChangeTempo = _.debounce(this.changeTempo, 200)
+        },
+        watch: {
+            tempo: function(val) {
+                this.debouncedChangeTempo();
+            },
+        },
+        methods: {
+            changeTempo: function() {
+                this.tempo = parseInt(this.tempo);
+                if (this.tempo == globalTempo) {
+                    return
+                }
+                console.log("updated");
+                var lastTime = (new Date().getTime()) / 1000 - this.lastChange;
+                if (globalTempo > 0) {
+                    this.bpmdata += `${globalTempo} ${lastTime}` + "\n";
+                }
+                this.lastChange = (new Date().getTime()) / 1000;
+                // set tempo and interval
+                globalTempo = this.tempo;
+                interval = 60000 / globalTempo / 24;
+            },
+        },
+    })
+    </script>
+</body>
+
+</html>
