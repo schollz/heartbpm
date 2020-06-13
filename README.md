@@ -5,7 +5,7 @@ Its 2020 and entirely possible to [control synthesizers with your thoughts](http
 
 <p align="center"><a href="https://www.youtube.com/watch?v=o_GRabvE5Pw"><img src="(https://img.youtube.com/vi/o_GRabvE5Pw/0.jpg" alt="Demo of playing" style="max-width:200px;"></a></p>
 
-### How does it work?
+## How does it work?
 
 The system is really simple and will work with basically any modern synthesizer (as long as it has MIDI). Here's a little schematic:
 
@@ -17,6 +17,8 @@ Connect a pulse sensor to your finger. The pulse sensor is connected to an Ardui
 The following instructions will give you a more detailed instruction.
 
 ## Stuff to buy.
+
+You'll be able to get started with $50 of equipment, plus computer and MIDI instrument.
 
 <ul>
 	<li>
@@ -49,7 +51,7 @@ First get the code. You can [clone from Github](https://github.com/schollz/heart
 First you can set up the pulse sensor. Simply attach the pulsesensor to the arduino.
 
 <center>
-<img alt="Connecting the pulse sensor to the Arduino" src="/img/heartbeat_bb_POoEsoKAle.jpg" width="100" style="max-width: 300px;"/>
+<img alt="Connecting the pulse sensor to the Arduino" src="https://schollz.com/img/heartbeat_bb_POoEsoKAle.jpg" width="100" style="max-width: 300px;"/>
 </center>
 
 Now use the [Arduino IDE](https://www.arduino.cc/en/main/software) to upload the [`heartbeat.ino`](https://github.com/schollz/heartbpm/blob/master/heartbeat.ino). Once that is uploaded, you can keep the Arduino connected and move on to the software.
@@ -72,9 +74,9 @@ $ ./heartbpm --com COMPORT
 Make sure you find your `COMPORT`. The easiest way to find your com port is to look at it from the Arduino IDE.
 
 
-<center>
+<p align="center">
 <img alt="Finding the name of the COM port." src="/img/comport.jpg" width="100" style="max-width: 500px;"/>
-</center>
+</p>
 
 Now, connect the pulse sensor to your finger and open a web browser to http://localhost:8054. You should be able to see some data coming out.
 
@@ -82,7 +84,10 @@ Now, connect the pulse sensor to your finger and open a web browser to http://lo
 
 To get it working with synthesizers, just attach your synthesizer via MIDI USB to your computer. Most modern synthesizers have USB which doubles as a MIDI connection. The website will *automatically* detect the synthesizers, so just attach them and reload the page. Then you will see which ones are attached.
 
-![Screenshot of gathering data with NTS-1 attached](https://schollz.com/img/heratbpmscreen.png)
+
+<p align="center">
+<img alt="Screenshot of gathering data with NTS-1 attached." src="https://schollz.com/img/heratbpmscreen.png" width="100" style="max-width: 500px;"/>
+</p>
 
 The website is getting the averaged pulse data calculated BPM. This BPM is used to send MIDI clock signals every 1/24th of a quarter note, which is the standard for setting tempos on devices.
 
