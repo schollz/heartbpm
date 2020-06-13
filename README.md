@@ -48,11 +48,11 @@ You'll be able to get started with $50 of equipment, plus computer and MIDI inst
 
 ### Get the code.
 
-First get the code. You can [clone from Github](https://github.com/schollz/heartbpm) or you can [download it directly](https://github.com/schollz/heartbpm/archive/master.zip).
+You can [clone the code from Github](https://github.com/schollz/heartbpm) or you can [download it directly](https://github.com/schollz/heartbpm/archive/master.zip).
 
 ### Setup the hardware.
 
-Simply attach the pulse sensor to the Arduino, plugging the data channel into `A0`.
+Simply attach a pulse sensor to the Arduino, plugging the data channel into `A0`.
 
 <p align="center">
 <img alt="Connecting the pulse sensor to the Arduino" src="https://schollz.com/img/heartbeat_bb_POoEsoKAle.jpg" width=550px/>
@@ -82,18 +82,20 @@ Make sure you find your `COMPORT`. The easiest way to find your com port is to l
 <img alt="Finding the name of the COM port." src="https://schollz.com/img/comport.jpg" width=550px/>
 </p>
 
-Now, connect the pulse sensor to your finger and open a web browser to http://localhost:8054. You should be able to see some data coming out.
+Now, connect the pulse sensor to your finger and open a *Chrome* web browser to http://localhost:8054. You should be able to see some data coming out. Note: this only works with Chrome and Opera web browsers since they have Web MIDI implementations.
 
 ### Just add synthesizers.
 
-To get it working with synthesizers, just attach your synthesizer via MIDI USB to your computer. Most modern synthesizers have USB which doubles as a MIDI connection. The website will *automatically* detect the synthesizers, so just attach them and reload the page. Then you will see which ones are attached.
+To get it working with synthesizers, just attach your synthesizer via MIDI to your computer, Most modern synthesizers have USB which doubles as a MIDI connection, so just connect by USB! 
+
+Connect your finger to the pulse sensor and then reload the web page. The web page will *automatically* detect the synthesizers and you can see which ones are attached. 
 
 
 <p align="center">
 <img alt="Screenshot of gathering data with NTS-1 attached." src="https://schollz.com/img/heratbpmscreen.png" width=550px/>
 </p>
 
-The website is getting the averaged pulse data calculated BPM. This BPM is used to send MIDI clock signals every 1/24th of a quarter note, which is the standard for setting tempos on devices.
+Your average heart rate will be detected and sent to the electronic instruments as the clock. The website is getting the averaged pulse data calculated BPM from the server. This BPM is used to send MIDI clock signals every 1/24th of a quarter note, which is the standard for setting tempos on devices.
 
 
 
