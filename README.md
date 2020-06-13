@@ -11,7 +11,7 @@ This system is really simple and will work with basically any modern synthesizer
 
 A finger is connected to a pulse sensor. The pulse sensor is connected to an Arduino. The Arduino can detect a pulse and send serial data to a computer. The computer runs a server that reads the serial data which updates a web page. The web page uses Web MIDI to send out the MIDI clock to all connected synths! *Music* ensues.
 
-Here's a demo of me playing three instruments with my heart rate:
+Here's a demo of me playing with three instruments sequenced to the tempo from my heart rate:
 
 
 <p align="center"><a href="https://www.youtube.com/watch?v=o_GRabvE5Pw"><img src="https://img.youtube.com/vi/o_GRabvE5Pw/0.jpg" alt="Demo of playing" style="max-width:200px;"></a></p>
