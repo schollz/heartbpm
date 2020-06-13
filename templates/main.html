@@ -66,10 +66,13 @@
                             fetch('/bpm')
                                 .then(response => response.json())
                                 .then(data => {
-                                    chart.data.datasets[0].data.push({
-                                        x: Date.now(),
-                                        y: data.point,
-                                    });
+                                    if ('point' in data) {
+                                        console.log(data.point);
+                                        chart.data.datasets[0].data.push({
+                                            x: Date.now(),
+                                            y: data.point,
+                                        });
+                                    }
                                 });
 
                         }

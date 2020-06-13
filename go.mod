@@ -1,4 +1,4 @@
-module github.com/schollz/temposync
+module github.com/schollz/heartbpm
 
 go 1.14
 
