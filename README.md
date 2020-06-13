@@ -3,7 +3,7 @@
 Its 2020 and entirely possible to [control synthesizers with your thoughts](https://www.youtube.com/watch?v=qSKBtEBRWi4), so of course its entirely possible to control your synthesizers with your pulse. In fact, its entirely possible to control your synthesizers with your heart rate with only ~$50 of equipment. This repository contains the code and instructions to hook your blood to your music.
 
 
-<p align="center"><a href="https://www.youtube.com/watch?v=o_GRabvE5Pw"><img src="(https://img.youtube.com/vi/o_GRabvE5Pw/0.jpg" alt="Demo of playing"></a></p>
+<p align="center"><a href="https://www.youtube.com/watch?v=o_GRabvE5Pw"><img src="(https://img.youtube.com/vi/o_GRabvE5Pw/0.jpg" alt="Demo of playing" style="max-width:200px;"></a></p>
 
 ### How does it work?
 
@@ -87,10 +87,11 @@ To get it working with synthesizers, just attach your synthesizer via MIDI USB t
 The website is getting the averaged pulse data calculated BPM. This BPM is used to send MIDI clock signals every 1/24th of a quarter note, which is the standard for setting tempos on devices.
 
 
+
 ## Useful notes.
 
 - If you are having trouble getting your pulse connected, try moving the pulse sensor just a little bit (1/8"). Sometimes if its not over your vein it will be harder to detect. Once its in the right spot it will stay there nicely, though!
-- If you are getting background noise its because the synthesizers are powered off your computer which (unless is battery operated) tends to have a noisy power supply. I highly recommend gettings an [audio isolator](https://www.amazon.com/gp/product/B06XQYN77L/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B06XQYN77L&linkCode=as2&tag=scholl-20&linkId=ef5f1fd6a1f83b3fbbcabd242e4ff4cc) to remove this noise.
+- If you are getting background noise its because the synthesizers are powered off your computer which (unless is battery operated) tends to have a noisy power supply. I highly recommend getting an [audio isolator](https://www.amazon.com/gp/product/B06XQYN77L/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B06XQYN77L&linkCode=as2&tag=scholl-20&linkId=ef5f1fd6a1f83b3fbbcabd242e4ff4cc) to remove this noise.
 
 ## Enjoy!
 
