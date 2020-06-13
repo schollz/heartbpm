@@ -75,7 +75,7 @@ Make sure you find your `COMPORT`. The easiest way to find your com port is to l
 
 
 <p align="center">
-<img alt="Finding the name of the COM port." src="/img/comport.jpg" width="100" style="max-width: 500px;"/>
+<img alt="Finding the name of the COM port." src="https://schollz.com/img/comport.jpg" width="100" style="max-width: 500px;"/>
 </p>
 
 Now, connect the pulse sensor to your finger and open a web browser to http://localhost:8054. You should be able to see some data coming out.
@@ -86,7 +86,7 @@ To get it working with synthesizers, just attach your synthesizer via MIDI USB t
 
 
 <p align="center">
-<img alt="Screenshot of gathering data with NTS-1 attached." src="https://schollz.com/img/heratbpmscreen.png" width="100" style="max-width: 500px;"/>
+<img alt="Screenshot of gathering data with NTS-1 attached." src="https://schollz.com/img/heratbpmscreen.png"/>
 </p>
 
 The website is getting the averaged pulse data calculated BPM. This BPM is used to send MIDI clock signals every 1/24th of a quarter note, which is the standard for setting tempos on devices.
