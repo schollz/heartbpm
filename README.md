@@ -5,7 +5,9 @@ Its 2020 and entirely possible to [control synthesizers with your thoughts](http
 
 This system is really simple and will work with basically any modern synthesizer (as long as it has MIDI). Here's a little schematic:
 
-
+<p align="center">
+<img src="https://schollz.com/img/schematic1.PNG" alt="A basic schematic of the setup." width=550px>
+</p>
 
 A finger is connected to a pulse sensor. The pulse sensor is connected to an Arduino. The Arduino can detect a pulse and send serial data to a computer. The computer runs a server that reads the serial data which updates a web page. The web page uses Web MIDI to send out the MIDI clock to all connected synths! *Music* ensues.
 
