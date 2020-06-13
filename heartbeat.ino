@@ -1,8 +1,5 @@
+/* heartbeat.ino */
 
-/*  heartbeat.ino */
-
-
-//  Variables
 // Pulse Sensor PURPLE WIRE connected to ANALOG PIN 0
 int pulseSensorPurplePin = 0;       
 // signal holds the incoming raw data. signal value can range from 0-1024
