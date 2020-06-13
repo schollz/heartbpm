@@ -84,9 +84,9 @@ Make sure you find your `COMPORT`. The easiest way to find your com port is to l
 
 Now, connect the pulse sensor to your finger and open a *Chrome* web browser to http://localhost:8054. You should be able to see some data coming out. Note: this only works with Chrome and Opera web browsers since they have Web MIDI implementations.
 
-### Just add synthesizers.
+### Just add instruments.
 
-To get it working with synthesizers, just attach your synthesizer via MIDI to your computer, Most modern synthesizers have USB which doubles as a MIDI connection, so just connect by USB! 
+Attach your electronic instrument via MIDI to your computer. Most modern synthesizers have USB which doubles as a MIDI connection, so just connect by USB! 
 
 Connect your finger to the pulse sensor and then reload the web page. The web page will *automatically* detect the synthesizers and you can see which ones are attached. 
 
