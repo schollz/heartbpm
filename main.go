@@ -72,6 +72,8 @@ func run() (err error) {
 
 		lastTime := time.Now()
 		go func() {
+			f, _ := os.Create("pulse.txt")
+			t0 := time.Now()
 			for {
 				var reply string
 				reply, err = read(s)
@@ -91,6 +93,7 @@ func run() (err error) {
 						continue
 					}
 					ma2.Add(dataPoint0)
+					f.Write([]byte(fmt.Sprintf("%f %2.0f\n", time.Since(t0).Seconds(), dataPoint0)))
 				}
 				if err != nil {
 					logger.Error(err)
